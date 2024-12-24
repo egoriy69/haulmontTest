@@ -37,6 +37,12 @@ public class GroupForm extends Dialog {
     }
 
     private void saveGroup() {
+        if (numberField.isEmpty()
+                || facultyField.isEmpty())
+        {
+            Notification.show("Пожалуйста, заполните все поля!", 3000, Notification.Position.MIDDLE);
+            return;
+        }
         currentGroup.setNumber(numberField.getValue());
         currentGroup.setFacultyName(facultyField.getValue());
         instituteService.saveGroup(currentGroup);

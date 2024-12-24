@@ -6,6 +6,7 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.textfield.TextField;
 import org.example.haulmont.entity.Group;
 import org.example.haulmont.entity.Student;
@@ -70,6 +71,14 @@ public class StudentForm extends Dialog {
     }
 
     private void saveStudent() {
+        if (firstNameField.isEmpty()
+                || lastNameField.isEmpty()
+                || birthDateField.getValue() == null
+                || groupComboBox.getValue() == null)
+        {
+            Notification.show("Пожалуйста, заполните все поля!", 3000, Notification.Position.MIDDLE);
+            return;
+        }
         currentStudent.setFirstName(firstNameField.getValue());
         currentStudent.setLastName(lastNameField.getValue());
         currentStudent.setMiddleName(middleNameField.getValue());
@@ -88,4 +97,6 @@ public class StudentForm extends Dialog {
         }
         close();
     }
+
+
 }
