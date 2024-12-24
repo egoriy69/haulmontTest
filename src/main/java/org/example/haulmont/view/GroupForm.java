@@ -9,14 +9,11 @@ import com.vaadin.flow.component.textfield.TextField;
 import org.example.haulmont.entity.Group;
 import org.example.haulmont.services.InstituteService;
 
-import java.util.function.Consumer;
-
 public class GroupForm extends Dialog {
 
     private final TextField numberField = new TextField("Номер группы");
     private final TextField facultyField = new TextField("Факультет");
     private final InstituteService instituteService;
-//    private final Consumer<Void> onSuccess;
     private Group currentGroup;
     private Runnable onSuccess;
 
@@ -57,8 +54,7 @@ public class GroupForm extends Dialog {
             catch (Exception e) {
                 Notification.show(e.getMessage());
             }
-//
-            //
+
         }
 
     }

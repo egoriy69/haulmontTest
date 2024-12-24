@@ -22,8 +22,8 @@ public class InstituteService {
         return groupRepository.findAll();
     }
 
-    public Group saveGroup(Group group) {
-        return groupRepository.save(group);
+    public void saveGroup(Group group) {
+        groupRepository.save(group);
     }
 
     public void deleteGroup(Long groupId) {
@@ -40,13 +40,12 @@ public class InstituteService {
         return groupRepository.findById(id);
     }
 
-    // Студенты
     public List<Student> findAllStudents() {
         return studentRepository.findAll();
     }
 
-    public Student saveStudent(Student student) {
-        return studentRepository.save(student);
+    public void saveStudent(Student student) {
+        studentRepository.save(student);
     }
 
     public void deleteStudent(Long studentId) {
@@ -58,11 +57,7 @@ public class InstituteService {
     }
 
     public List<Student> filterStudents(String lastNameFilter, String groupNumberFilter) {
-        return studentRepository.findAll().stream()
-                .filter(s -> lastNameFilter == null || s.getLastName().toLowerCase()
-                        .contains(lastNameFilter.toLowerCase()))
-                .filter(s -> groupNumberFilter == null || s.getGroup().getNumber()
-                        .equalsIgnoreCase(groupNumberFilter))
-                .toList();
+
+        return studentRepository.findByFilters(lastNameFilter, groupNumberFilter);
     }
 }

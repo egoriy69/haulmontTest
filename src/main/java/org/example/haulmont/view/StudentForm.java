@@ -28,7 +28,6 @@ public class StudentForm extends Dialog {
     private final Button deleteButton = new Button("Удалить");
 
     private final InstituteService instituteService;
-//    private final Consumer<Void> onSuccess;
     private Student currentStudent;
     private Runnable onSuccess;
 
@@ -37,13 +36,11 @@ public class StudentForm extends Dialog {
         this.onSuccess = onSuccess;
         this.currentStudent = student;
 
-        // Настраиваем поля
         firstNameField.setValue(student.getFirstName() != null ? student.getFirstName() : "");
         lastNameField.setValue(student.getLastName() != null ? student.getLastName() : "");
         middleNameField.setValue(student.getMiddleName() != null ? student.getMiddleName() : "");
         birthDateField.setValue(student.getBirthDate() != null ? student.getBirthDate() : LocalDate.now());
 
-        // Список групп для выбора
         List<Group> groups = instituteService.findAllGroups();
         groupComboBox.setItems(groups);
         groupComboBox.setItemLabelGenerator(Group::getNumber);
@@ -51,7 +48,6 @@ public class StudentForm extends Dialog {
             groupComboBox.setValue(student.getGroup());
         }
 
-        // События на кнопках
         saveButton.addClickListener(e -> saveStudent());
         cancelButton.addClickListener(e -> close());
         deleteButton.addClickListener(e -> deleteStudent());
